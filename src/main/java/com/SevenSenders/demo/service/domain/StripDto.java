@@ -12,10 +12,4 @@ public class StripDto {
     private String img;
     private Date year;
 
-
-
-  /*  private String pictureUrl ;
-    private String description;
-    private String webUrl;
-    private Data publishingDate;*/
 }

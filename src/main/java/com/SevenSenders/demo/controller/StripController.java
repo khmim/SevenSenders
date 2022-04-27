@@ -1,12 +1,9 @@
 package com.SevenSenders.demo.controller;
 
 import com.SevenSenders.demo.service.domain.StripDto;
-import com.SevenSenders.demo.service.domain.StripDto;
 import com.SevenSenders.demo.service.domain.StripsDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -21,9 +18,6 @@ import java.util.Map;
 @RestController()
 @RequestMapping()
 public class StripController {
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     private StripsDto stripsDto= new StripsDto();
 
