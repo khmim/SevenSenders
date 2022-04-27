@@ -1,6 +1,6 @@
 package com.SevenSenders.demo.controller;
 
-import com.SevenSenders.demo.service.domain.ComicDto;
+import com.SevenSenders.demo.service.domain.StripDto;
 import com.SevenSenders.demo.service.domain.StripDto;
 import com.SevenSenders.demo.service.domain.StripsDto;
 import lombok.RequiredArgsConstructor;
@@ -30,27 +30,26 @@ public class StripController {
 
     @GetMapping("/start")
     @ResponseStatus(HttpStatus.OK)
-    public StripsDto getLastComic() {
-        String comicUri = "https://xkcd.com/info.0.json";
+    public StripsDto getLaststrip() {
+        String stripUri = "https://xkcd.com/info.0.json";
         RestTemplate restTemplate = new RestTemplate();
-        ComicDto comic = restTemplate.getForObject(comicUri, ComicDto.class);
-        StripsDto stripsDto=getLastComics(comic.getNum());
+        StripDto strip = restTemplate.getForObject(stripUri, StripDto.class);
+        StripsDto stripsDto=getLaststrips(strip.getNum());
         return stripsDto;
     }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public StripsDto getLastComics(@PathVariable int comicNum){
+    public StripsDto getLaststrips(@PathVariable int stripNum){
         List<StripDto> strips = new ArrayList<>();
         for(int i =0 ; i<9;i++){
-            comicNum--;
-            String comicUri = "https://xkcd.com/{comicNum}/info.0.json";
-            Map<String, String> comicParams = new HashMap<String, String>();
-            comicParams.put("comicNum", String.valueOf(comicNum));
+            stripNum--;
+            String stripUri = "https://xkcd.com/{stripNum}/info.0.json";
+            Map<String, String> stripParams = new HashMap<String, String>();
+            stripParams.put("stripNum", String.valueOf(stripNum));
             RestTemplate restTemplate = new RestTemplate();
-            ComicDto comic = restTemplate.getForObject(comicUri, ComicDto.class, comicParams);
-            StripDto stripDto = modelMapper.map(comic, StripDto.class);
-            strips.toArray(new StripDto[]{stripDto});
+            StripDto strip = restTemplate.getForObject(stripUri, StripDto.class, stripParams);
+            strips.add(strip);
         }
         stripsDto.setStrips(strips);
         return stripsDto;
