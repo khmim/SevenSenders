@@ -1,8 +1,8 @@
 package com.SevenSenders.demo.model;
 
 import lombok.Data;
-@Data
 
+@Data
 public class Strip {
     private String pictureUrl ;
     private String description;

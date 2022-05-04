@@ -17,6 +17,11 @@ import java.util.*;
 public class StripService {
 
     private StripsDto stripsDto= new StripsDto();
+    private static String feedUrl="http://feeds.feedburner.com/PoorlyDrawnLines";
+    private static String stripUri = "https://xkcd.com/{stripNum}/info.0.json";
+    private static String sUri = "https://xkcd.com/info.0.json";
+
+
 
     public StripsDto sortingByDate (StripsDto stripsDto){
         List<StripDto> strips = stripsDto.getStrips();
@@ -28,7 +33,7 @@ public class StripService {
     public StripsDto getFeed () throws FeedException, IOException {
         List<StripDto> strips = new ArrayList<>();
         SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = input.build(new XmlReader(new URL("http://feeds.feedburner.com/PoorlyDrawnLines")));
+        SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
         System.out.println(feed);
         List<SyndEntry> comics= feed.getEntries();
         for(int i =0 ; i<9;i++){
@@ -43,11 +48,10 @@ public class StripService {
         return sortingByDate(stripsDto);
     }
 
-    public StripsDto getLastStrips(@PathVariable int stripNum){
+    public StripsDto getStrips(int stripNum){
         List<StripDto> strips = new ArrayList<>();
         for(int i =0 ; i<9;i++){
             stripNum--;
-            String stripUri = "https://xkcd.com/{stripNum}/info.0.json";
             Map<String, String> stripParams = new HashMap<String, String>();
             stripParams.put("stripNum", String.valueOf(stripNum));
             RestTemplate restTemplate = new RestTemplate();
@@ -58,10 +62,9 @@ public class StripService {
         return sortingByDate(stripsDto);
     }
     public StripsDto getLaststrip() {
-        String stripUri = "https://xkcd.com/info.0.json";
         RestTemplate restTemplate = new RestTemplate();
-        StripDto strip = restTemplate.getForObject(stripUri, StripDto.class);
-        StripsDto stripsDto=getLastStrips(strip.getNum());
+        StripDto strip = restTemplate.getForObject(sUri, StripDto.class);
+        StripsDto stripsDto= getStrips(strip.getNum());
         return stripsDto;
     }
 }
