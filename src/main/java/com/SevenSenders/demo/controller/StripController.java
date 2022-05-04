@@ -67,8 +67,7 @@ public class StripController {
     @ResponseBody
     public String getFeed () throws FeedException, IOException {
         SyndFeedInput input = new SyndFeedInput();
-        URL feedSource = new URL("http://feeds.feedburner.com/PoorlyDrawnLines");
-        SyndFeed feed = input.build(new XmlReader(feedSource));
+        SyndFeed feed = input.build(new XmlReader(new URL("http://feeds.feedburner.com/PoorlyDrawnLines")));
         return new SyndFeedOutput().outputString(feed);
     }
 }
