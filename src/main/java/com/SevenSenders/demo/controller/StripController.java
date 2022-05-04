@@ -1,8 +1,7 @@
 package com.SevenSenders.demo.controller;
 
 import com.SevenSenders.demo.service.domain.StripDto;
-import com.SevenSenders.demo.service.domain.StripService;
-import com.SevenSenders.demo.service.domain.StripsDto;
+import com.SevenSenders.demo.service.StripService;
 import com.rometools.rome.io.FeedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +21,11 @@ public class StripController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public StripsDto getLastComics() throws FeedException, IOException {
-        StripsDto stripsDto= new StripsDto();
+    public  List<StripDto> getLastComics() throws FeedException, IOException {
         List<StripDto> strips = new ArrayList<StripDto>();
         strips.addAll((stripService.getFeed().getStrips()));
-        strips.addAll(stripService.getLaststrip().getStrips());
-        stripsDto.setStrips(strips);
-        return stripsDto;
+        strips.addAll(stripService.getLastStrip().getStrips());
+        return strips;
     }
 
 

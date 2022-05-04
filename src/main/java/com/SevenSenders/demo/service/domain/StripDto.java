@@ -3,7 +3,6 @@ package com.SevenSenders.demo.service.domain;
 import lombok.Data;
 
 import java.util.Comparator;
-import java.util.Date;
 
 @Data
 public class StripDto implements Comparable<StripDto>{
@@ -12,6 +11,18 @@ public class StripDto implements Comparable<StripDto>{
     private String title;
     private String img;
     private String year;
+
+
+    public StripDto() {
+    }
+
+    public StripDto(String link, String title, String img, String year) {
+        this.num = num;
+        this.link = link;
+        this.title = title;
+        this.img = img;
+        this.year = year;
+    }
 
     @Override
     public int compareTo(StripDto o) {

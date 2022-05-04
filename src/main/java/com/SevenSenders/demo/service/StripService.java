@@ -1,12 +1,13 @@
-package com.SevenSenders.demo.service.domain;
+package com.SevenSenders.demo.service;
 
+import com.SevenSenders.demo.service.domain.StripDto;
+import com.SevenSenders.demo.service.domain.StripsDto;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class StripService {
         SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
         System.out.println(feed);
         List<SyndEntry> comics= feed.getEntries();
-        for(int i =0 ; i<9;i++){
+        for(int i =0 ; i<10 ;i++){
             StripDto strip= new StripDto();
             strip.setYear(comics.get(i).getPublishedDate().toString());
             strip.setImg(comics.get(i).getUri());
@@ -50,7 +51,7 @@ public class StripService {
 
     public StripsDto getStrips(int stripNum){
         List<StripDto> strips = new ArrayList<>();
-        for(int i =0 ; i<9;i++){
+        for(int i =0 ; i<10 ;i++){
             stripNum--;
             Map<String, String> stripParams = new HashMap<String, String>();
             stripParams.put("stripNum", String.valueOf(stripNum));
@@ -61,7 +62,7 @@ public class StripService {
         stripsDto.setStrips(strips);
         return sortingByDate(stripsDto);
     }
-    public StripsDto getLaststrip() {
+    public StripsDto getLastStrip() {
         RestTemplate restTemplate = new RestTemplate();
         StripDto strip = restTemplate.getForObject(sUri, StripDto.class);
         StripsDto stripsDto= getStrips(strip.getNum());
