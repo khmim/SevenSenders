@@ -1,22 +1,14 @@
 package com.SevenSenders.demo.controller;
 
 
-import com.SevenSenders.demo.controller.StripController;
-import com.SevenSenders.demo.service.domain.StripDto;
-import com.SevenSenders.demo.service.domain.StripsDto;
-import org.hamcrest.Matchers;
+import com.SevenSenders.demo.service.model.StripDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

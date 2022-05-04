@@ -1,4 +1,4 @@
-package com.SevenSenders.demo.service.domain;
+package com.SevenSenders.demo.service.model;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.SevenSenders.demo.service;
 
-import com.SevenSenders.demo.service.domain.StripDto;
-import com.SevenSenders.demo.service.domain.StripsDto;
+import com.SevenSenders.demo.service.model.StripDto;
+import com.SevenSenders.demo.service.model.StripsDto;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;

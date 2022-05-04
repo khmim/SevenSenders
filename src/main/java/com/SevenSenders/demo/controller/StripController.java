@@ -1,6 +1,6 @@
 package com.SevenSenders.demo.controller;
 
-import com.SevenSenders.demo.service.domain.StripDto;
+import com.SevenSenders.demo.service.model.StripDto;
 import com.SevenSenders.demo.service.StripService;
 import com.rometools.rome.io.FeedException;
 import org.springframework.beans.factory.annotation.Autowired;
