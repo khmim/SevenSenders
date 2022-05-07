@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class StripService {
@@ -37,20 +38,25 @@ public class StripService {
         SyndFeed feed = input.build(new XmlReader(new URL(feedUrl)));
         System.out.println(feed);
         List<SyndEntry> comics= feed.getEntries();
-        for(int i =0 ; i<10 ;i++){
+        strips=comics.stream().map((SyndEntry comic) -> new StripDto(comic.getLink(), comic.getTitle(), comic.getUri(), comic.getPublishedDate().toString()))
+                .limit(10).collect(Collectors.toList());
+        ;
+/*        for(int i =0 ; i<10 ;i++){
             StripDto strip= new StripDto();
             strip.setYear(comics.get(i).getPublishedDate().toString());
             strip.setImg(comics.get(i).getUri());
             strip.setLink(comics.get(i).getLink());
             strip.setTitle(comics.get(i).getTitle());
             strips.add(strip);
-        }
+        }*/
+
         stripsDto.setStrips(strips);
         return sortingByDate(stripsDto);
     }
 
     public StripsDto getStrips(int stripNum){
         List<StripDto> strips = new ArrayList<>();
+
         for(int i =0 ; i<10 ;i++){
             stripNum--;
             Map<String, String> stripParams = new HashMap<String, String>();
