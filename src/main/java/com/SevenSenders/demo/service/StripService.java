@@ -68,7 +68,7 @@ public class StripService {
         for(int i =0 ; i<10 ;i++){
             stripNum--;
             stripParams.put("stripNum", String.valueOf(stripNum));
-            StripDto strip = restTemplate.getForObject(stripUri, StripDto.class,stripParams.put("stripNum", String.valueOf(stripNum)))ک
+            StripDto strip = restTemplate.getForObject(stripUri, StripDto.class,stripParams.put("stripNum", String.valueOf(stripNum)));
             strips.add(strip);
         }
         stripsDto.setStrips(strips);
