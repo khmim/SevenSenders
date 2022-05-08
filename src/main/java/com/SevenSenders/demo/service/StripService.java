@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StripService {
@@ -56,13 +57,18 @@ public class StripService {
 
     public StripsDto getStrips(int stripNum){
         List<StripDto> strips = new ArrayList<>();
+        Map<String, String> stripParams = new HashMap<String, String>();
+        RestTemplate restTemplate = new RestTemplate();
+
+/*        Stream.iterate(0, i -> i + 1)
+                .limit(10)
+                .map(stripNum--)
+                .forEach(restTemplate.getForObject(stripUri, StripDto.class,stripParams.put("stripNum", String.valueOf(stripNum))));*/
 
         for(int i =0 ; i<10 ;i++){
             stripNum--;
-            Map<String, String> stripParams = new HashMap<String, String>();
             stripParams.put("stripNum", String.valueOf(stripNum));
-            RestTemplate restTemplate = new RestTemplate();
-            StripDto strip = restTemplate.getForObject(stripUri, StripDto.class, stripParams);
+            StripDto strip = restTemplate.getForObject(stripUri, StripDto.class,stripParams.put("stripNum", String.valueOf(stripNum)))ک
             strips.add(strip);
         }
         stripsDto.setStrips(strips);
